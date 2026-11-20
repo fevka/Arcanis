@@ -1,0 +1,19 @@
+<Bindings>
+  <Binding name="ARCANISPATH_NEXT" header="ARCANISPATH" category="ADDONS">
+    if Arcanis and Arcanis.Engine then Arcanis.Engine:Next() end
+  </Binding>
+  <Binding name="ARCANISPATH_PREV" category="ADDONS">
+    if Arcanis and Arcanis.Engine then Arcanis.Engine:Prev() end
+  </Binding>
+  <Binding name="ARCANISPATH_NEAREST" category="ADDONS">
+    if Arcanis and Arcanis.Window then Arcanis.Window:GoRecommended() end
+  </Binding>
+  <Binding name="CLICK ArcanisPathQuestItem:LeftButton" category="ADDONS">
+  </Binding>
+  <Binding name="ARCANISPATH_WINDOW" category="ADDONS">
+    if SlashCmdList and SlashCmdList.ARCANIS then SlashCmdList.ARCANIS("window") end
+  </Binding>
+  <Binding name="ARCANISPATH_MAIN" category="ADDONS">
+    if Arcanis and Arcanis.PathWindow then Arcanis.PathWindow:Toggle() end
+  </Binding>
+</Bindings>

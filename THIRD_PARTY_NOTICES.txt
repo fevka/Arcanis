@@ -1,0 +1,13 @@
+Arcanis - third-party notices
+================================
+
+This file is not loaded by the game. It keeps the notices that the licences of
+some bundled data require. Nothing else in the addon names these sources.
+
+1. Talent tree data (Rotation/TalentIDs.lua: talent names, rows, columns, ranks)
+   From talentsforever.com, licensed under Creative Commons Attribution 4.0
+   (CC BY 4.0, https://creativecommons.org/licenses/by/4.0/). Changes: reduced to
+   name, position and rank, and matched to the game's trait node and spell IDs.
+
+2. Font (Media/Fonts/Righteous.ttf): SIL Open Font License 1.1, see
+   Media/Fonts/LICENSE.txt.
