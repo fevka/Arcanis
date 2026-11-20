@@ -1,0 +1,38 @@
+-- Arcanis guide data (generated). Do not edit by hand.
+local _, ns = ...
+
+ns.Guides:Register{
+  id = "horde-59-60-winterspring-silithus-ii", title = "Winterspring/Silithus II 59-60", faction = "Horde",
+  minLevel = 59, maxLevel = 60,
+  steps = {
+    { type = "fly", to = "Un'Goro", zone = "Silithus", x = 48.67, y = 36.7 },
+    { type = "turnin", quest = 3962, name = "It's Dangerous to Go Alone", npc = "Linken", zone = "Un'Goro Crater", x = 44.66, y = 8.1, optional = true },
+    { type = "fly", to = "Tanaris", zone = "Silithus", x = 48.67, y = 36.7 },
+    { type = "fly", to = "Tanaris", zone = "Un'Goro Crater", x = 45.23, y = 5.82 },
+    { type = "turnin", quest = 4504, name = "Super Sticky", npc = "Tran'rek", zone = "Tanaris", x = 51.57, y = 26.76, optional = true },
+    { type = "turnin", quest = 4507, name = "Pawn Captures Queen", npc = "Alchemist Pestlezugg", zone = "Tanaris", x = 50.89, y = 26.96, optional = true },
+    { type = "accept", quest = 4509, name = "Calm Before the Storm", npc = "Alchemist Pestlezugg", zone = "Tanaris", x = 50.89, y = 26.96 },
+    { type = "hearth", to = "Everlook" },
+    { type = "turnin", quest = 5163, name = "Are We There, Yeti?", npc = "Umi Rumplesnicker", zone = "Winterspring", x = 60.88, y = 37.62, optional = true },
+    { type = "fly", to = "Moonglade", zone = "Winterspring", x = 60.47, y = 36.28, classes = { "WARRIOR", "PALADIN", "HUNTER", "ROGUE", "PRIEST", "SHAMAN", "MAGE", "WARLOCK" } },
+    { type = "turnin", quest = 6844, name = "Umber, Archivist", npc = "Umber", zone = "Moonglade", x = 44.88, y = 35.6, optional = true },
+    { type = "accept", quest = 6845, name = "Uncovering Past Secrets", npc = "Umber", zone = "Moonglade", x = 44.88, y = 35.6, optional = true },
+    { type = "turnin", quest = 6845, name = "Uncovering Past Secrets", npc = "Rabine Saturna", zone = "Moonglade", x = 51.69, y = 45.1, optional = true },
+    { type = "turnin", quest = 5527, name = "A Reliquary of Purity", npc = "Rabine Saturna", zone = "Moonglade", x = 51.69, y = 45.1, optional = true },
+    { type = "accept", quest = 1185, name = "Under the Chitin Was...", npc = "Umber", zone = "Moonglade", x = 44.88, y = 35.6, optional = true },
+    { type = "turnin", quest = 1185, name = "Under the Chitin Was...", npc = "Umber", zone = "Moonglade", x = 44.88, y = 35.6, optional = true },
+    { type = "goto", zone = "Felwood", x = 63.15, y = 13.21, cave = true },
+    { type = "fly", to = "Orgrimmar", zone = "Moonglade", x = 32.1, y = 66.65, classes = { "WARRIOR", "PALADIN", "HUNTER", "ROGUE", "PRIEST", "SHAMAN", "WARLOCK", "DRUID" } },
+    { type = "turnin", quest = 4509, name = "Calm Before the Storm", npc = "Zilzibin Drumlore", zone = "Orgrimmar", x = 56.26, y = 46.68 },
+    { type = "accept", quest = 4511, name = "Calm Before the Storm", npc = "Zilzibin Drumlore", zone = "Orgrimmar", x = 56.26, y = 46.68 },
+    { type = "turnin", quest = 4511, name = "Calm Before the Storm", npc = "Karus", zone = "Orgrimmar", x = 49.58, y = 69.12 },
+    { type = "turnin", quest = 7826, name = "A Donation of Wool", npc = "Rashona Straglash", zone = "Orgrimmar", x = 63.6, y = 51.23, optional = true },
+    { type = "turnin", quest = 7827, name = "A Donation of Silk", npc = "Rashona Straglash", zone = "Orgrimmar", x = 63.6, y = 51.23, optional = true },
+    { type = "turnin", quest = 7831, name = "A Donation of Mageweave", npc = "Rashona Straglash", zone = "Orgrimmar", x = 63.6, y = 51.23, optional = true },
+    { type = "turnin", quest = 7824, name = "A Donation of Runecloth", npc = "Rashona Straglash", zone = "Orgrimmar", x = 63.6, y = 51.23, optional = true },
+    { type = "turnin", quest = 7833, name = "A Donation of Wool", npc = "Vehena", zone = "Orgrimmar", x = 37.7, y = 87.9, optional = true },
+    { type = "turnin", quest = 7834, name = "A Donation of Silk", npc = "Vehena", zone = "Orgrimmar", x = 37.7, y = 87.9, optional = true },
+    { type = "turnin", quest = 7835, name = "A Donation of Mageweave", npc = "Vehena", zone = "Orgrimmar", x = 37.7, y = 87.9, optional = true },
+    { type = "turnin", quest = 7836, name = "A Donation of Runecloth", npc = "Vehena", zone = "Orgrimmar", x = 37.7, y = 87.9, optional = true },
+  },
+}
