@@ -1,0 +1,115 @@
+local _, ns = ...
+ns.DungeonExtra("lbrs", {
+  quests = {
+  },
+  loot = {
+    { boss = "Burning Felguard", items = {
+      { id = 13181, n = "Demonskin Gloves", q = 3, s = "Hands, Cloth", c = "578", a = "926" },
+      { id = 13182, n = "Phase Blade", q = 3, s = "One-Hand, Sword", c = "124378" },
+    } },
+    { boss = "Spirestone Butcher", items = {
+      { id = 12608, n = "Butcher's Apron", q = 3, s = "Back, Cloth", c = "578", a = "926" },
+      { id = 13286, n = "Rivenspike", q = 3, s = "One-Hand, Axe", c = "1236" },
+    } },
+    { boss = "Highlord Omokk", items = {
+      { id = 16670, n = "Boots of Elements", q = 3, s = "Feet, Mail", c = "36", a = "12" },
+      { id = 13166, n = "Slamshot Shoulders", q = 3, s = "Shoulder, Plate", c = "123456789" },
+      { id = 13168, n = "Plate of the Shaman King", q = 3, s = "Chest, Plate", c = "123456789" },
+      { id = 13170, n = "Skyshroud Leggings", q = 3, s = "Legs, Cloth", c = "578", a = "926" },
+      { id = 13169, n = "Tressermane Leggings", q = 3, s = "Legs, Leather", c = "49", a = "36" },
+      { id = 13167, n = "Fist of Omokk", q = 3, s = "Two-Hand, Mace", c = "124695" },
+    } },
+    { boss = "Spirestone Battle Lord", items = {
+      { id = 13284, n = "Swiftdart Battleboots", q = 3, s = "Feet, Mail", c = "36", a = "12" },
+      { id = 13285, n = "The Blackrock Slicer", q = 3, s = "Two-Hand, Axe", c = "1236" },
+    } },
+    { boss = "Spirestone Lord Magus", items = {
+      { id = 13282, n = "Ogreseer Tower Boots", q = 3, s = "Feet, Cloth", c = "578", a = "926" },
+      { id = 13283, n = "Magus Ring", q = 3, s = "Finger, Trinket", c = "123456789" },
+      { id = 13261, n = "Globe of D'sak", q = 3, s = "Held In Off-hand, Trinket", c = "578926" },
+    } },
+    { boss = "Shadow Hunter Vosh'gajin", items = {
+      { id = 16712, n = "Shadowcraft Gloves", q = 3, s = "Hands, Leather", c = "49", a = "36" },
+      { id = 13257, n = "Demonic Runed Spaulders", q = 3, s = "Shoulder, Leather", c = "49", a = "36" },
+      { id = 12626, n = "Funeral Cuffs", q = 3, s = "Wrist, Cloth", c = "578", a = "926" },
+      { id = 13255, n = "Trueaim Gauntlets", q = 3, s = "Hands, Mail", c = "36", a = "12" },
+      { id = 12653, n = "Riphook", q = 3, s = "Ranged, Bow", c = "143" },
+      { id = 12651, n = "Blackcrow", q = 3, s = "Ranged, Crossbow", c = "143" },
+    } },
+    { boss = "War Master Voone", items = {
+      { id = 16676, n = "Beaststalker's Gloves", q = 3, s = "Hands, Mail", c = "36", a = "12" },
+      { id = 13177, n = "Talisman of Evasion", q = 3, s = "Neck, Trinket", c = "123456789" },
+      { id = 13179, n = "Brazecore Armguards", q = 3, s = "Wrist, Mail", c = "36", a = "12" },
+      { id = 22231, n = "Kayser's Boots of Precision", q = 3, s = "Feet, Cloth", c = "578", a = "926" },
+      { id = 13173, n = "Flightblade Throwing Axe", q = 3, s = "Thrown, Speed 2.20", c = "143" },
+      { id = 12582, n = "Keris of Zul'Serak", q = 3, s = "One-Hand, Dagger", c = "14356789" },
+      { id = 13175, n = "Voone's Twitchbow", q = 2, s = "Ranged, Bow", c = "143" },
+    } },
+    { boss = "Bannok Grimaxe", items = {
+      { id = 12637, n = "Backusarian Gauntlets", q = 3, s = "Hands, Plate", c = "123456789" },
+      { id = 12634, n = "Chiselbrand Girdle", q = 3, s = "Waist, Mail", c = "36", a = "12" },
+      { id = 12621, n = "Demonfork", q = 3, s = "Main Hand, Axe", c = "1236" },
+    } },
+    { boss = "Mother Smolderweb", items = {
+      { id = 16715, n = "Wildheart Boots", q = 3, s = "Feet, Leather", c = "49", a = "36" },
+      { id = 13244, n = "Gilded Gauntlets", q = 3, s = "Hands, Mail", c = "36", a = "12" },
+      { id = 13213, n = "Smolderweb's Eye", q = 3, s = "Trinket, Trinket", c = "123456789" },
+      { id = 13183, n = "Venomspitter", q = 3, s = "One-Hand, Mace", c = "124695" },
+    } },
+    { boss = "Crystal Fang", items = {
+      { id = 13185, n = "Sunderseer Mantle", q = 3, s = "Shoulder, Cloth", c = "578", a = "926" },
+      { id = 13184, n = "Fallbrush Handgrips", q = 3, s = "Hands, Leather", c = "49", a = "36" },
+      { id = 13218, n = "Fang of the Crystal Spider", q = 3, s = "One-Hand, Dagger", c = "14356789" },
+    } },
+    { boss = "Urok Doomhowl", items = {
+      { id = 13258, n = "Slaghide Gauntlets", q = 3, s = "Hands, Leather", c = "49", a = "36" },
+      { id = 22232, n = "Marksman's Girdle", q = 3, s = "Waist, Mail", c = "36", a = "12" },
+      { id = 13259, n = "Ribsteel Footguards", q = 3, s = "Feet, Plate", c = "123456789" },
+      { id = 13178, n = "Rosewine Circle", q = 3, s = "Finger, Trinket", c = "123456789" },
+    } },
+    { boss = "Quartermaster Zigris", items = {
+      { id = 13253, n = "Hands of Power", q = 3, s = "Hands, Cloth", c = "578", a = "926" },
+      { id = 13252, n = "Cloudrunner Girdle", q = 3, s = "Waist, Leather", c = "49", a = "36" },
+    } },
+    { boss = "Halycon", items = {
+      { id = 13212, n = "Halycon's Spiked Collar", q = 3, s = "Neck, Trinket", c = "123456789" },
+      { id = 22313, n = "Ironweave Bracers", q = 3, s = "Wrist, Cloth", c = "578", a = "926" },
+      { id = 13211, n = "Slashclaw Bracers", q = 3, s = "Wrist, Mail", c = "36", a = "12" },
+      { id = 13210, n = "Pads of the Dread Wolf", q = 3, s = "Feet, Leather", c = "49", a = "36" },
+    } },
+    { boss = "Gizrul the Slavener", items = {
+      { id = 16718, n = "Wildheart Spaulders", q = 3, s = "Shoulder, Leather", c = "49", a = "36" },
+      { id = 13208, n = "Bleak Howler Armguards", q = 3, s = "Wrist, Leather", c = "49", a = "36" },
+      { id = 13206, n = "Wolfshear Leggings", q = 3, s = "Legs, Cloth", c = "578", a = "926" },
+      { id = 13205, n = "Rhombeard Protector", q = 3, s = "Shield, Shield", c = "123456789" },
+    } },
+    { boss = "Ghok Bashguud", items = {
+      { id = 13203, n = "Armswake Cloak", q = 3, s = "Back, Cloth", c = "578", a = "926" },
+      { id = 13198, n = "Hurd Smasher", q = 3, s = "One-Hand, Fist Weapon", c = "14693" },
+      { id = 13204, n = "Bashguuder", q = 3, s = "One-Hand, Mace", c = "124695" },
+    } },
+    { boss = "Overlord Wyrmthalak", items = {
+      { id = 13143, n = "Mark of the Dragon Lord", q = 4, s = "Finger, Trinket", c = "123456789" },
+      { id = 16679, n = "Beaststalker's Mantle", q = 3, s = "Shoulder, Mail", c = "36", a = "12" },
+      { id = 13162, n = "Reiver Claws", q = 3, s = "Hands, Plate", c = "123456789" },
+      { id = 13164, n = "Heart of the Scale", q = 3, s = "Trinket, Trinket", c = "123456789" },
+      { id = 22321, n = "Heart of Wyrmthalak", q = 3, s = "Trinket, Trinket", c = "123456789" },
+      { id = 13163, n = "Relentless Scythe", q = 3, s = "Two-Hand, Sword", c = "124378" },
+      { id = 13148, n = "Chillpike", q = 3, s = "Two-Hand, Polearm", c = "1239" },
+      { id = 13161, n = "Trindlehaven Staff", q = 3, s = "Two-Hand, Staff", c = "5789632" },
+    } },
+    { boss = "Trash Drops", items = {
+      { id = 16696, n = "Devout Belt", q = 3, s = "Waist, Cloth", c = "578", a = "926" },
+      { id = 16685, n = "Magister's Belt", q = 3, s = "Waist, Cloth", c = "578", a = "926" },
+      { id = 16683, n = "Magister's Bindings", q = 3, s = "Wrist, Cloth", c = "578", a = "926" },
+      { id = 16703, n = "Dreadmist Bracers", q = 3, s = "Wrist, Cloth", c = "578", a = "926" },
+      { id = 16713, n = "Shadowcraft Belt", q = 3, s = "Waist, Leather", c = "49", a = "36" },
+      { id = 16716, n = "Wildheart Belt", q = 3, s = "Waist, Leather", c = "49", a = "36" },
+      { id = 16680, n = "Beaststalker's Belt", q = 3, s = "Waist, Mail", c = "36", a = "12" },
+      { id = 16673, n = "Cord of Elements", q = 3, s = "Waist, Mail", c = "36", a = "12" },
+      { id = 16736, n = "Belt of Valor", q = 3, s = "Waist, Plate", c = "123456789" },
+      { id = 16735, n = "Bracers of Valor", q = 3, s = "Wrist, Plate", c = "123456789" },
+      { id = 13260, n = "Wind Dancer Boots", q = 3, s = "Feet, Mail", c = "36", a = "12" },
+    } },
+  },
+})

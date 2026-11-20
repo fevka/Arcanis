@@ -1,0 +1,167 @@
+-- Arcanis: kolay ama guclu esyalar (ns.EasyItems). Mentor > Items sekmesi ve "Now" onerileri buradan.
+-- Yapi (esya / gorev / NPC kimligi, koordinat) Forever veri setinden ve rehber verimizden; notlar ozgun.
+-- Alanlar:
+--   id        benzersiz anahtar          item      esya kimligi (sahipse gizlenir)
+--   name      esyanin oyundaki adi       kind      "bag" | "weapon" | "armor" | "wand" | "rest"
+--   slots     canta yuvasi (kind bag)    from, to  onerilen seviye araligi
+--   faction   "Alliance" | "Horde" | nil (iki taraf)
+--   races     yalniz bu irklar (UnitRace token)   classes  yalniz bu siniflar (UnitClass token)
+--   source    "quest" | "drop" | "vendor"
+--   quests    bitince gizlenir (biri yeter)        npc, zone, x, y  okun gidecegi yer (x, y 0-100)
+--   dungeon   Data/Dungeons kimligi (ok zindan girisine), boss  dusuren
+--   guide     ozel rehber (taraf -> rehber kimligi): "Start the guide" dugmesi
+--   vendors   { { npc, zone, x, y, faction } }: en yakin taraf saticisina ok
+--   note      { enUS, trTR } kendi cumlemiz      verify   oyunda dogrulanmali
+local _, ns = ...
+
+local CASTER = { "PRIEST", "MAGE", "WARLOCK", "DRUID", "SHAMAN" }
+local WAND = { "PRIEST", "MAGE", "WARLOCK" }
+
+ns.EasyItems = {
+  -- ===================== CANTALAR: baslangic bolgesi (6 yuva) =====================
+  { id = "book-bag", item = 279936, name = "Book Bag", kind = "bag", slots = 6, from = 1, to = 12, faction = "Alliance",
+    races = { "Human" },
+    source = "quest", quests = { 91775 }, npc = "Marshal Dughan", zone = "Elwynn Forest", x = 42.11, y = 65.93,
+    note = { enUS = "The end of the chain that starts with the chewed book in Northshire. A free bag before you even leave the valley.",
+             trTR = "Northshire'daki kemirilmiş kitapla başlayan zincirin sonu. Daha vadiden çıkmadan bedava bir çanta." } },
+  { id = "canvas-latchbag", item = 277977, name = "Canvas Latchbag", kind = "bag", slots = 6, from = 4, to = 12, faction = "Alliance",
+    races = { "Dwarf", "Gnome" },
+    source = "quest", quests = { 97277 }, npc = "Grund Drokda", zone = "Dun Morogh", x = 28.67, y = 67.51,
+    note = { enUS = "Short quest in Coldridge Valley. Take it as soon as you reach level 4.",
+             trTR = "Coldridge Valley'de kısa bir görev. 4. seviyeye gelir gelmez al." } },
+  { id = "soft-saber-sack", item = 280088, name = "Soft Saber Sack", kind = "bag", slots = 6, from = 4, to = 12, faction = "Alliance",
+    races = { "NightElf" },
+    source = "quest", quests = { 87288 }, npc = "Aldia", zone = "Teldrassil", x = 55.51, y = 57.15,
+    note = { enUS = "Dolanaar quest: bring back pelts from the cats around the village.",
+             trTR = "Dolanaar görevi: köyün çevresindeki kedilerden post getir." } },
+  { id = "simple-leather-satchel", item = 256935, name = "Simple Leather Satchel", kind = "bag", slots = 6, from = 4, to = 12,
+    races = { "Skyborne" }, source = "quest", quests = { 92515 }, npc = "Indari Sunseam", zone = "Zephras Isle", x = 44.68, y = 44.53,
+    note = { enUS = "Shen'dar Village on Zephras Isle. The village welcome quest opens it.",
+             trTR = "Zephras Isle'daki Shen'dar Village. Köyün karşılama görevi bunu açar." } },
+  { id = "collecting-basket", item = 279939, name = "Collecting Basket", kind = "bag", slots = 6, from = 4, to = 12, faction = "Horde",
+    races = { "Scourge" },
+    source = "quest", quests = { 86784 }, npc = "Deathguard Bartholomew", zone = "Tirisfal Glades", x = 58.47, y = 51.39,
+    note = { enUS = "Gather dry branches near Brill. Quick and safe.",
+             trTR = "Brill yakınında kuru dal topla. Hızlı ve güvenli." } },
+  { id = "handmade-leather-bag", item = 11845, name = "Handmade Leather Bag", kind = "bag", slots = 6, from = 4, to = 12, faction = "Horde",
+    races = { "Orc", "Troll" },
+    source = "quest", quests = { 791 }, npc = "Furl Scornbrow", zone = "Durotar", x = 49.88, y = 40.39,
+    note = { enUS = "At the Razor Hill watchtower. Collect from the beasts on your way and hand it in on the spot.",
+             trTR = "Razor Hill gözetleme kulesinde. Yoldaki hayvanlardan topla, aynı yerde teslim et." } },
+  { id = "scorched-leather-pouch", item = 277200, name = "Scorched Leather Pouch", kind = "bag", slots = 6, from = 1, to = 10, faction = "Horde",
+    races = { "Tauren" },
+    source = "quest", quests = { 95805 }, npc = "Seer Graytongue", zone = "Mulgore", x = 42.54, y = 90.13,
+    note = { enUS = "A timed walk to the ritual fire on Red Cloud Mesa. Go straight there, do not stop to fight.",
+             trTR = "Red Cloud Mesa'daki ayin ateşine süreli bir yürüyüş. Doğruca git, dövüşmek için durma." } },
+
+  -- ===================== CANTALAR: 8-14 yuva =====================
+  { id = "blanchy-pouch", item = 1537, name = "Old Blanchy's Feed Pouch", kind = "bag", slots = 8, from = 9, to = 22, faction = "Alliance",
+    source = "quest", quests = { 151 }, npc = "Verna Furlbrow", zone = "Westfall", x = 59.92, y = 19.42,
+    note = { enUS = "Pick up oats in the fields of Westfall. One of the easiest 8-slot bags in the game.",
+             trTR = "Westfall tarlalarından yulaf topla. Oyundaki en kolay 8 yuvalı çantalardan biri." } },
+  { id = "wizbang-gunnysack", item = 2082, name = "Wizbang's Gunnysack", kind = "bag", slots = 8, from = 9, to = 22, faction = "Alliance",
+    source = "quest", quests = { 1003 }, npc = "Wizbang Cranktoggle", zone = "Darkshore", x = 36.97, y = 44.13,
+    note = { enUS = "The Buzzbox chain along the Darkshore coast. Each box hands you the next task; the last one gives the bag.",
+             trTR = "Darkshore kıyısı boyunca Buzzbox zinciri. Her kutu bir sonraki işi verir; sonuncusu çantayı verir." } },
+  { id = "scuffed-shipping-crate", item = 277332, name = "Scuffed Shipping Crate", kind = "bag", slots = 8, from = 9, to = 22,
+    faction = "Horde", source = "quest", quests = { 97253 }, npc = "Wrenix the Wretched", zone = "The Barrens", x = 63.07, y = 36.32,
+    note = { enUS = "Ratchet, for the Horde. The parts drop at the pirate camp just south of town.",
+             trTR = "Ratchet, Horde için. Parçalar kasabanın hemen güneyindeki korsan kampından düşer." } },
+  { id = "deviate-hide-pack", item = 918, name = "Deviate Hide Pack", kind = "bag", slots = 10, from = 13, to = 25,
+    source = "quest", quests = { 1486 }, npc = "Nalpak", zone = "The Barrens", x = 45.99, y = 35.66,
+    note = { enUS = "Hides from the deviate beasts in the caves around Wailing Caverns; you do not have to finish the dungeon. Pick the pack, not the leggings.",
+             trTR = "Wailing Caverns çevresindeki mağaralarda deviate hayvanlarının derileri; zindanı bitirmen gerekmez. Pantolonu değil çantayı seç." } },
+  { id = "snakeskin-bag", item = 6446, name = "Snakeskin Bag", kind = "bag", slots = 10, from = 17, to = 25,
+    source = "drop", dungeon = "wc", boss = "Lady Anacondra", verify = true,
+    note = { enUS = "A low drop chance from Lady Anacondra. Nice if it drops, but do not farm the dungeon for it.",
+             trTR = "Lady Anacondra'dan düşük şansla düşer. Düşerse güzel, ama bunun için zindanı tekrar tekrar koşma." } },
+  { id = "hunting-satchel", item = 270017, name = "Hunting Satchel", kind = "bag", slots = 10, from = 15, to = 25, faction = "Alliance",
+    source = "quest", quests = { 271 }, npc = "Vyrin Swiftwind", zone = "Loch Modan", x = 81.73, y = 64.14,
+    note = { enUS = "Elite quest at Farstrider Lodge: bring a friend. Everyone gets the satchel, and you also choose an ammo sack or a quiver.",
+             trTR = "Farstrider Lodge'da elit görev: yanına bir arkadaş al. Çanta herkese verilir, ayrıca mermi kesesi ya da sadak seçersin." } },
+  { id = "old-toolbox", item = 221498, name = "Old Toolbox", kind = "bag", slots = 12, from = 14, to = 40,
+    source = "quest", quests = { 79192 }, guide = { Alliance = "alliance-cozy-sleeping-bag", Horde = "horde-cozy-sleeping-bag" },
+    note = { enUS = "Stepping Stones, part of the hidden sleeping bag trail. You get two 12-slot bags at once (with the Sturdy Lunchbox) from level 14.",
+             trTR = "Stepping Stones, gizli uyku tulumu izinin bir parçası. 14. seviyeden itibaren aynı anda iki 12 yuvalı çanta (Sturdy Lunchbox ile)." } },
+  { id = "spidersilk-pouch", item = 276891, name = "Spidersilk Pouch", kind = "bag", slots = 12, from = 23, to = 35, faction = "Horde",
+    source = "quest", quests = { 96260 }, npc = "Yorn Grimtotem", zone = "Mulgore", x = 30.5, y = 14.19,
+    note = { enUS = "Skywatcher Plateau north of Thunder Bluff. Bring three crystal threads from the spiders; choose the pouch.",
+             trTR = "Thunder Bluff'ın kuzeyindeki Skywatcher Plateau. Örümceklerden üç kristal iplik getir; keseyi seç." } },
+  { id = "explorers-knapsack", item = 11324, name = "Explorer's Knapsack", kind = "bag", slots = 14, from = 40, to = 60,
+    source = "quest", quests = { 626 }, npc = "Musty Scroll", zone = "Stranglethorn Vale", x = 30.71, y = 88.6,
+    note = { enUS = "A treasure riddle that sends you across four zones. Long walk, but a 14-slot bag for no fights at all.",
+             trTR = "Seni dört bölgeye gönderen bir hazine bilmecesi. Uzun yürüyüş, ama hiç dövüşmeden 14 yuvalı çanta." } },
+
+  -- ===================== CANTALAR: satici =====================
+  { id = "brown-leather-satchel", item = 4498, name = "Brown Leather Satchel", kind = "bag", slots = 8, from = 8, to = 30,
+    source = "vendor", vendors = {
+      { npc = "Thurman Mullby", zone = "Stormwind City", x = 64.84, y = 72.16, faction = "Alliance" },
+      { npc = "Trak'gen", zone = "Orgrimmar", x = 48.12, y = 80.53, faction = "Horde" },
+      { npc = "Kuruk", zone = "Thunder Bluff", x = 38.91, y = 64.7, faction = "Horde" },
+    },
+    note = { enUS = "About 25 silver at most general goods vendors. Fill your empty bag slots with these as soon as you can.",
+             trTR = "Çoğu general goods satıcısında yaklaşık 25 silver. Boş çanta yuvalarını bir an önce bunlarla doldur." } },
+  { id = "heavy-brown-bag", item = 4497, name = "Heavy Brown Bag", kind = "bag", slots = 10, from = 20, to = 40,
+    source = "vendor", vendors = {
+      { npc = "Thurman Mullby", zone = "Stormwind City", x = 64.84, y = 72.16, faction = "Alliance" },
+      { npc = "Trak'gen", zone = "Orgrimmar", x = 48.12, y = 80.53, faction = "Horde" },
+      { npc = "Kuruk", zone = "Thunder Bluff", x = 38.91, y = 64.7, faction = "Horde" },
+    },
+    note = { enUS = "About 2 gold from general goods and bag vendors in cities. Worth it once quest bags run out.",
+             trTR = "Şehirlerdeki general goods ve çanta satıcılarında yaklaşık 2 gold. Görev çantaları bitince değer." } },
+
+  -- ===================== DINLENME =====================
+  { id = "cozy-sleeping-bag", item = 211527, name = "Cozy Sleeping Bag", kind = "rest", from = 14, to = 60,
+    source = "quest", quests = { 79976 }, guide = { Alliance = "alliance-cozy-sleeping-bag", Horde = "horde-cozy-sleeping-bag" },
+    note = { enUS = "Lay it down anywhere for rested XP and an XP bonus. The trail is long but every step is a walk, not a fight.",
+             trTR = "Her yere ser: rested XP ve XP bonusu verir. İz uzun ama her adımı dövüş değil, yürüyüş." } },
+
+  -- ===================== SILAHLAR VE ZIRH =====================
+  { id = "skorns-hammer", item = 4971, name = "Skorn's Hammer", kind = "weapon", from = 6, to = 16, faction = "Horde",
+    classes = { "WARRIOR", "SHAMAN", "PALADIN" }, source = "quest", quests = { 770 },
+    npc = "Skorn Whitecloud", zone = "Mulgore", x = 46.03, y = 63.44,
+    note = { enUS = "Kill Ghost Howl, the white wolf that roams Mulgore, and bring the cloak it drops to Bloodhoof Village.",
+             trTR = "Mulgore'da dolaşan beyaz kurt Ghost Howl'u öldür, düşürdüğü pelerini Bloodhoof Village'a götür." } },
+  { id = "skorns-rifle", item = 3079, name = "Skorn's Rifle", kind = "weapon", from = 6, to = 16, faction = "Horde",
+    classes = { "HUNTER" }, source = "quest", quests = { 770 },
+    npc = "Skorn Whitecloud", zone = "Mulgore", x = 46.03, y = 63.44,
+    note = { enUS = "Same quest as the hammer: the white wolf Ghost Howl drops the cloak that starts it. A big early ranged upgrade.",
+             trTR = "Çekiçle aynı görev: beyaz kurt Ghost Howl görevi başlatan pelerini düşürür. Erken dönem için büyük bir menzilli silah yükseltmesi." } },
+  { id = "smites-hammer", item = 7230, name = "Smite's Mighty Hammer", kind = "weapon", from = 17, to = 26,
+    classes = { "WARRIOR", "PALADIN", "SHAMAN" }, source = "drop", dungeon = "dm", boss = "Mr. Smite",
+    note = { enUS = "Two-handed mace from Mr. Smite in the Deadmines. A run or two usually does it.",
+             trTR = "Deadmines'ta Mr. Smite'tan iki elli topuz. Genelde bir iki koşu yeter." } },
+  { id = "cruel-barb", item = 5191, name = "Cruel Barb", kind = "weapon", from = 17, to = 28,
+    classes = { "ROGUE", "WARRIOR", "PALADIN", "HUNTER" }, source = "drop", dungeon = "dm", boss = "Edwin VanCleef",
+    note = { enUS = "One-handed sword from the last boss of the Deadmines. Lasts you well into your twenties.",
+             trTR = "Deadmines'ın son bossundan tek elli kılıç. Yirmili seviyelerin sonlarına kadar işini görür." } },
+  { id = "staff-of-westfall", item = 2042, name = "Staff of Westfall", kind = "weapon", from = 18, to = 30, faction = "Alliance",
+    classes = CASTER, source = "quest", quests = { 166 }, npc = "Gryan Stoutmantle", zone = "Westfall", x = 56.33, y = 47.52,
+    note = { enUS = "The end of the Defias chain in Sentinel Hill (finish it in the Deadmines). The other choices are leggings and a tunic.",
+             trTR = "Sentinel Hill'deki Defias zincirinin sonu (Deadmines'ta biter). Diğer seçenekler pantolon ve tunik." } },
+  { id = "crescent-staff", item = 6505, name = "Crescent Staff", kind = "weapon", from = 18, to = 30, faction = "Horde",
+    classes = CASTER, source = "quest", quests = { 914 }, npc = "Nara Wildmane", zone = "Thunder Bluff", x = 75.65, y = 31.61,
+    note = { enUS = "Kill the four Fang leaders in Wailing Caverns. One of the best caster weapons until your thirties.",
+             trTR = "Wailing Caverns'taki dört Fang liderini öldür. Otuzlu seviyelere kadar en iyi büyücü silahlarından biri." } },
+  { id = "wingblade", item = 6504, name = "Wingblade", kind = "weapon", from = 18, to = 30, faction = "Horde",
+    classes = { "ROGUE", "WARRIOR", "HUNTER" }, source = "quest", quests = { 914 }, npc = "Nara Wildmane", zone = "Thunder Bluff", x = 75.65, y = 31.61,
+    note = { enUS = "Same Wailing Caverns quest as the Crescent Staff: the fast sword choice for melee.",
+             trTR = "Crescent Staff ile aynı Wailing Caverns görevi: yakın dövüşçüler için hızlı kılıç seçeneği." } },
+  { id = "trailblazer-boots", item = 10653, name = "Trailblazer Boots", kind = "armor", from = 15, to = 28, faction = "Horde",
+    classes = { "ROGUE", "DRUID" }, source = "quest", quests = { 3514 }, npc = "Kadrak", zone = "The Barrens", x = 48.12, y = 5.42, verify = true,
+    note = { enUS = "Quest from the watch post at the north edge of the Barrens. Gloves and gauntlets are the other choices.",
+             trTR = "Barrens'ın kuzey ucundaki gözetleme noktasının görevi. Diğer seçenekler eldivenler." } },
+  { id = "gravestone-scepter", item = 7001, name = "Gravestone Scepter", kind = "wand", from = 22, to = 34,
+    classes = WAND, source = "quest", quests = { 6561, 1200 }, dungeon = "bfd", verify = true,
+    note = { enUS = "Blackfathom Deeps: the quest giver waits inside. Kill the twilight lord for a strong shadow wand.",
+             trTR = "Blackfathom Deeps: görevi veren içeride bekler. Güçlü bir gölge değneği için twilight lordu öldür." } },
+  { id = "verigans-fist", item = 6953, name = "Verigan's Fist", kind = "weapon", from = 20, to = 32, faction = "Alliance",
+    classes = { "PALADIN" }, races = { "Human", "Dwarf" }, source = "quest", quests = { 1806 },
+    npc = "Jordan Stilwell", zone = "Dun Morogh", x = 52.49, y = 36.92,
+    note = { enUS = "Paladin class quest at the gates of Ironforge. A two-handed hammer with a holy proc; carries you to the thirties.",
+             trTR = "Ironforge kapısındaki paladin sınıf görevi. Kutsal etkili iki elli çekiç; seni otuzlu seviyelere taşır." } },
+  { id = "whirlwind-axe", item = 6975, name = "Whirlwind Axe", kind = "weapon", from = 30, to = 42,
+    classes = { "WARRIOR" }, source = "quest", quests = { 1792 }, npc = "Bath'rah the Windwatcher", zone = "Alterac Mountains", x = 80.5, y = 66.92,
+    note = { enUS = "Warrior quest from level 30. The axe is usable at 30 but rated like level 40 gear; sword and hammer are the other choices.",
+             trTR = "30. seviyeden warrior görevi. Balta 30'da kullanılır ama 40 seviye eşya gibi güçlü; diğer seçenekler kılıç ve çekiç." } },
+}
